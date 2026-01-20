@@ -1,8 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion'; // For entrance animations
 import gsap from 'gsap'; // For magnetic hover effects
+import Logo from "@/assets/logowhite.png"
+import Pdf from "@/assets/portfolio.pdf"
 
-// --- Helper Component: Magnetic Link (GSAP) ---
+
+
 const MagneticLink = ({ children, href }) => {
   const ref = useRef(null);
 
@@ -66,10 +69,10 @@ const Footer = () => {
             >
               {/* Logo Placeholder */}
               <div className="text-3xl font-bold mb-6 tracking-tighter">
-                AGENCY<span className="text-blue-500">.</span>
+               <img src={Logo} alt='logo'  className="w-64 h-auto" />
               </div>
               <p className="text-gray-400 max-w-sm text-lg leading-relaxed">
-                We craft digital experiences that merge art, code, and human interaction. Let's build something meaningful together.
+                Picturize specializes in crafting compelling brand stories that elevate products and businesses. From ideation and design to seamless production, we deliver 360-degree content creation including visual effects, video editing, and innovative content that inspires and resonates.
               </p>
             </motion.div>
           </div>
@@ -86,9 +89,8 @@ const Footer = () => {
                className="flex flex-col gap-4"
             >
               <h3 className="uppercase text-sm font-semibold tracking-wider text-gray-500 mb-2">Work</h3>
-              <MagneticLink href="/portfolio">Portfolio</MagneticLink>
-              <MagneticLink href="/case-studies">Case Studies</MagneticLink>
-              <MagneticLink href="/services">Services</MagneticLink>
+              <MagneticLink href={Pdf} target="_blank">Portfolio</MagneticLink>
+              {/* <MagneticLink href="/case-studies">Enquiry</MagneticLink> */}
             </motion.div>
 
             {/* Social Media Section */}
@@ -103,27 +105,27 @@ const Footer = () => {
               <MagneticLink href="https://twitter.com">Twitter / X</MagneticLink>
               <MagneticLink href="https://instagram.com">Instagram</MagneticLink>
               <MagneticLink href="https://linkedin.com">LinkedIn</MagneticLink>
-              <MagneticLink href="https://github.com">GitHub</MagneticLink>
             </motion.div>
           </div>
         </div>
 
         {/* Bottom Section: Copyright & Big Text */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="border-t border-gray-800 pt-10 flex flex-col md:flex-row justify-between items-end"
-        >
-           <span className="text-gray-600 text-sm">
-             © {new Date().getFullYear()} Agency Inc. All rights reserved.
-           </span>
-           
-           {/* Optional: Big Typographic Element */}
-           <h1 className="text-[12vw] leading-none font-bold text-gray-900 select-none pointer-events-none mt-10 md:mt-0">
-             CREATIVE
-           </h1>
-        </motion.div>
+       <motion.div 
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 1, delay: 0.3 }}
+  className="border-t border-gray-800 pt-10 flex flex-col items-center text-center"
+>
+
+
+  {/* Big Typographic Element */}
+  <h1 className="text-[12vw] uppercase leading-none font-bold text-gray-900 select-none pointer-events-none mt-6">
+    Picturize
+  </h1>
+    <span className="text-gray-600 pt-4 text-sm">
+    © {new Date().getFullYear()} <a href="https://bmtechx.in/">BMTechx.in</a>. All rights reserved.
+  </span>
+</motion.div>
 
       </div>
     </footer>

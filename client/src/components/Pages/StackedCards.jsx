@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, forwardRef, useState } from 'react';
+import React, { useEffect, useRef, forwardRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // --- Assets ---
 import Banner2 from "@/assets/banner2.png"; 
-import PopArtSwirl from "@/assets/banner.png"; // Keeping your import
+import PopArtSwirl from "@/assets/banner.png"; 
 import Pdf from "@/assets/portfolio.pdf"
 
 // --- Icons ---
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaCheckCircle, FaSpinner, FaPaperPlane, FaLightbulb, FaFingerprint, FaEye, FaVrCardboard, FaArrowRight } from 'react-icons/fa';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaCheckCircle, FaLightbulb, FaFingerprint, FaVrCardboard, FaArrowRight } from 'react-icons/fa';
 import { BsStars } from "react-icons/bs"; 
 import { PiCubeTransparentBold } from "react-icons/pi"; 
 
@@ -16,52 +16,13 @@ gsap.registerPlugin(ScrollTrigger);
 const StackedCards = forwardRef((props, ref) => {
   const componentRef = useRef(null);
   const secondSectionRef = useRef(null);
-  
-  // --- Refs for Form Animation ---
-  const formContainerRef = useRef(null);
-  const successContainerRef = useRef(null);
-  const buttonRef = useRef(null);
-
-  // --- Form State ---
-  const [formState, setFormState] = useState('idle');
 
   const scrollToNext = () => {
     secondSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (formState !== 'idle') return;
-
-    setFormState('submitting');
-
-    gsap.to(buttonRef.current, { 
-        width: '60px', 
-        borderRadius: '50%',
-        duration: 0.4,
-        ease: 'power2.inOut'
-    });
-
-    setTimeout(() => {
-        setFormState('success');
-        const tl = gsap.timeline();
-        tl.to(formContainerRef.current, { 
-            opacity: 0, 
-            y: -20, 
-            duration: 0.4, 
-            display: 'none',
-            ease: "power2.in"
-        })
-        .fromTo(successContainerRef.current,
-            { display: 'none', opacity: 0, scale: 0.8 },
-            { display: 'flex', opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.7)" }
-        );
-    }, 2000);
-  };
-
   useEffect(() => {
     const ctx = gsap.context(() => {
-      
       const cards = gsap.utils.toArray(".stack-card");
       const headerSelector = "header, .navbar"; 
 
@@ -73,7 +34,6 @@ const StackedCards = forwardRef((props, ref) => {
           pin: true, 
           pinSpacing: false, 
           scrub: true,
-          
           onEnter: () => {
             const color = card.dataset.headerColor;
             if (color) {
@@ -102,7 +62,6 @@ const StackedCards = forwardRef((props, ref) => {
             });
         }
       });
-
     }, componentRef);
 
     return () => ctx.revert();
@@ -118,7 +77,6 @@ const StackedCards = forwardRef((props, ref) => {
     "Banner & Web Creative Content", "Package Design", "Poster / Magazines Flyers"
   ];
   
-  // Data for the Green Section
   const brandingServices = [
     { title: "Projection Mapping", icon: <FaVrCardboard /> },
     { title: "Brand Consultancy", icon: <FaLightbulb /> },
@@ -130,30 +88,17 @@ const StackedCards = forwardRef((props, ref) => {
 
   return (
     <div ref={ref} className="w-full relative bg-black">
-      {/* CSS to hide scrollbar but keep functionality */}
       <style>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        /* Custom Text Stroke Utility */
-        .text-stroke-black {
-            -webkit-text-stroke: 2px black;
-            color: transparent;
-        }
-        .text-stroke-white {
-            -webkit-text-stroke: 2px white;
-            color: transparent;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .text-stroke-black { -webkit-text-stroke: 2px black; color: transparent; }
+        .text-stroke-white { -webkit-text-stroke: 2px white; color: transparent; }
       `}</style>
 
       <div ref={componentRef}>
         
-        {/* ================= STACKED SECTION 1 (Video & VFX) - Z-10 ================= */}
-        <section 
+        {/* SECTION 1: Video & VFX */}
+       <section 
             className="stack-card h-screen w-full sticky top-0 z-10 bg-[#2A8F85] text-white overflow-hidden border-t border-white/5"
             data-header-color="white" 
         >
@@ -214,9 +159,7 @@ const StackedCards = forwardRef((props, ref) => {
                 </div>
             </div>
         </section>
-
-        {/* ================= STACKED SECTION 2 - Graphics (Yellow) - Z-20 ================= */}
-        <section 
+<section 
             ref={secondSectionRef}
             className="stack-card h-screen w-full sticky top-0 z-20 bg-[#FFF500] text-black overflow-hidden"
             data-header-color="black"
@@ -368,144 +311,85 @@ const StackedCards = forwardRef((props, ref) => {
                 </div>
             </div>
         </section>
+        {/* SECTION 4: About (Content Only) */}
+        {/* SECTION 4: About (Optimized for sm/md) */}
+<section className="stack-card h-screen w-full sticky top-0 z-40 bg-[#F50537] text-white overflow-hidden" data-header-color="white">
+  {/* Background Pattern - Lower opacity on mobile for better text legibility */}
+  <div className="absolute -right-[40%] md:-right-[25%] top-1/2 -translate-y-1/2 w-[90%] h-[90%] pointer-events-none z-0">
+    <img 
+      src={Banner2} 
+      alt="Halftone Pop Art" 
+      className="w-full h-full object-contain opacity-40 md:opacity-80"
+    />
+  </div>
 
-        {/* ================= STACKED SECTION 4 (Contact) - Red - Z-40 ================= */}
-        <section 
-            className="stack-card h-screen w-full sticky top-0 z-40 bg-[#F50537] text-white overflow-hidden"
-            data-header-color="white"
-        >
-             <div className="absolute -right-20 top-0 h-full w-full md:w-1/2 pointer-events-none opacity-20 mix-blend-screen overflow-hidden">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
-                    {[...Array(20)].map((_, i) => (
-                        <rect key={i} x={50 - (i * 2)} y={50 - (i * 2)} width={i * 5} height={i * 5} fill="none" stroke="white" strokeWidth="0.2" transform={`rotate(${i * 5} 50 50)`} />
-                    ))}
-                </svg>
+  {/* Added flex-col and justify-between to handle vertical spacing on small screens */}
+  <div className="inner-content w-full h-full relative overflow-y-auto no-scrollbar z-10 flex flex-col">
+    <div className="container mx-auto px-6 py-12 md:py-20 flex-grow flex flex-col justify-center">
+      <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
+        <div>
+          <div className="flex items-center gap-3 text-[#ffdb4d] uppercase tracking-[0.2em] text-[10px] sm:text-xs font-bold mb-4 md:mb-6">
+            <span className="w-6 h-[2px] bg-[#ffdb4d]"></span> 04. Our Story
+          </div>
+          
+          {/* Decreased font sizes: 4xl for mobile, 6xl for tablet, 8xl for desktop */}
+          <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase mb-4 md:mb-8 tracking-tighter leading-none">
+            About
+          </h2>
+          
+          {/* Responsive body text scaling */}
+          <p className="text-lg sm:text-xl md:text-2xl font-medium leading-tight mb-4 md:mb-8 text-white">
+            Picturize, we specialize in crafting compelling brand stories that elevate your products and businesses. From ideation and design to seamless production, we handle every step of the content creation journey with precision and passion.
+          </p>
+          
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-200 opacity-90">
+            Our team is backed by deep expertise across various industries, delivering exceptional results. Whether it's creating stunning visual effects for a movie, video editing for renowned brands, or designing and producing innovative content, we excel in every aspect of 360-degree content production.
+          </p>
+        </div>
+
+        {/* Contact Info Footer - Refined grid for sm (2 cols) and md (3 cols) */}
+        <div className="pt-8 md:pt-12 border-t border-white/20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          
+          {/* Call Us */}
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="p-3 md:p-4 bg-white/20 md:bg-white/50 rounded-full shrink-0">
+              <FaPhoneAlt className="text-sm md:text-base" />
             </div>
-
-            <div className="inner-content w-full h-full relative overflow-y-auto no-scrollbar pb-32">
-                <div className="container mx-auto px-4 md:px-6 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                    
-                    {/* Left Column: About & Contact Info */}
-                    <div className="space-y-8 md:space-y-12 relative z-10">
-                        <div>
-                             <div className="flex items-center gap-3 text-[#ffdb4d] uppercase tracking-[0.2em] text-xs font-bold mb-4 lg:mb-6">
-                                <span className="w-6 h-[2px] bg-[#ffdb4d]"></span>
-                                04. Step Four
-                            </div>
-                             <h2 className="text-5xl md:text-7xl lg:text-8xl font-black uppercase mb-6 tracking-tighter">About</h2>
-                            <p className="text-lg md:text-xl font-medium leading-relaxed opacity-90 mb-6">
-                                Picturize, we specialize in crafting compelling brand stories that elevate your products and businesses. From ideation and design to seamless production, we handle every step of the content creation journey with precision and passion.
-                            </p>
-                            <p className="text-sm md:text-base leading-relaxed opacity-80">
-                                Our team is backed by deep expertise across various industries, delivering exceptional results. Whether it's creating stunning visual effects for a movie, video editing for renowned brands, or designing and producing innovative content, we excel in every aspect of 360-degree content production.
-                            </p>
-                        </div>
-
-                        <div className="space-y-6 pt-6 border-t border-white/20">
-                            <h3 className="text-2xl font-bold mb-4">Contact Information</h3>
-                            <div className="flex items-center gap-4 group cursor-pointer">
-                                <div className="p-3 bg-white/10 rounded-full group-hover:bg-white group-hover:text-[#F50537] transition-colors"><FaPhoneAlt size={18} /></div>
-                                <span className="text-lg">+1 012 3456 789</span>
-                            </div>
-                            <div className="flex items-center gap-4 group cursor-pointer">
-                                <div className="p-3 bg-white/10 rounded-full group-hover:bg-white group-hover:text-[#F50537] transition-colors"><FaEnvelope size={18} /></div>
-                                <span className="text-lg">info@picturize.com</span>
-                            </div>
-                             <div className="flex items-center gap-4 group cursor-pointer">
-                                <div className="p-3 bg-white/10 rounded-full group-hover:bg-white group-hover:text-[#F50537] transition-colors"><FaMapMarkerAlt size={18} /></div>
-                                <span className="text-lg">Maharastra | Tamilnadu</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Interactive Form */}
-                    <div className="relative z-10 bg-white/10 backdrop-blur-md p-6 md:p-10 rounded-3xl border border-white/20 shadow-2xl min-h-[500px] flex items-center justify-center w-full">
-                        <div ref={formContainerRef} className="w-full">
-                            <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                                    <div className="space-y-2">
-                                        <label className="text-xs uppercase tracking-widest font-bold opacity-70">First Name</label>
-                                        <input type="text" required className="w-full bg-transparent border-b border-white/30 focus:border-white outline-none py-2 transition-colors placeholder:text-white/30 text-white" placeholder="John" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs uppercase tracking-widest font-bold opacity-70">Last Name</label>
-                                        <input type="text" className="w-full bg-transparent border-b border-white/30 focus:border-white outline-none py-2 transition-colors placeholder:text-white/30 text-white" placeholder="Doe" />
-                                    </div>
-                                </div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                                    <div className="space-y-2">
-                                        <label className="text-xs uppercase tracking-widest font-bold opacity-70">Email</label>
-                                        <input type="email" required className="w-full bg-transparent border-b border-white/30 focus:border-white outline-none py-2 transition-colors placeholder:text-white/30 text-white" placeholder="john@example.com" />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-xs uppercase tracking-widest font-bold opacity-70">Phone Number</label>
-                                        <input type="tel" className="w-full bg-transparent border-b border-white/30 focus:border-white outline-none py-2 transition-colors placeholder:text-white/30 text-white" placeholder="+1 012 3456 789" />
-                                    </div>
-                                </div>
-                                <div className="space-y-4">
-                                    <label className="text-xs uppercase tracking-widest font-bold opacity-70">Select Subject?</label>
-                                    <div className="flex flex-wrap gap-4">
-                                        {['General Inquiry', 'Content services', 'Vendor'].map((subject, i) => (
-                                            <label key={i} className="flex items-center gap-2 cursor-pointer group">
-                                                <input type="radio" name="subject" className="accent-white w-4 h-4" defaultChecked={i===0}/>
-                                                <span className="text-sm group-hover:opacity-100 opacity-80 transition-opacity">{subject}</span>
-                                            </label>
-                                        ))}
-                                    </div>
-                                </div>
-                                 <div className="space-y-2">
-                                    <label className="text-xs uppercase tracking-widest font-bold opacity-70">Message</label>
-                                    <textarea rows="3" className="w-full bg-transparent border-b border-white/30 focus:border-white outline-none py-2 transition-colors placeholder:text-white/30 text-white resize-none" placeholder="Write your message.."></textarea>
-                                </div>
-                                <div className="pt-4 flex justify-end">
-                                    <button 
-                                            ref={buttonRef}
-                                            disabled={formState !== 'idle'}
-                                            type="submit"
-                                            className={`
-                                                relative h-14 bg-black text-white rounded-lg font-bold uppercase tracking-wider 
-                                                hover:bg-white hover:text-black hover:scale-105 transition-all duration-300 shadow-lg
-                                                flex items-center justify-center overflow-hidden
-                                                ${formState === 'idle' ? 'px-8 w-auto' : 'w-14 px-0 cursor-default bg-black/80 hover:bg-black/80 hover:scale-100'}
-                                            `}
-                                    >
-                                            {formState === 'idle' && (
-                                                <span className="flex items-center gap-2">Send Message <FaPaperPlane className="text-xs"/></span>
-                                            )}
-                                            {formState === 'submitting' && (
-                                                <FaSpinner className="animate-spin text-white text-xl" />
-                                            )}
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div ref={successContainerRef} className="hidden flex-col items-center justify-center text-center space-y-6 w-full h-full absolute inset-0 p-10">
-                            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg animate-bounce">
-                                <FaCheckCircle className="text-[#2a880e] text-5xl" />
-                            </div>
-                            <div>
-                                <h3 className="text-3xl font-black uppercase tracking-tight mb-2">Message Sent!</h3>
-                                <p className="opacity-80 max-w-xs mx-auto">Thank you for contacting Picturize. We will get back to you shortly.</p>
-                            </div>
-                            <button 
-                                onClick={() => {
-                                    gsap.to(successContainerRef.current, { opacity: 0, duration: 0.3, onComplete: () => {
-                                            setFormState('idle');
-                                            gsap.set(successContainerRef.current, { display: 'none' });
-                                            gsap.set(formContainerRef.current, { display: 'block', y: 0, opacity: 1 });
-                                            gsap.set(buttonRef.current, { width: 'auto', borderRadius: '0.5rem' }); 
-                                    }});
-                                }}
-                                className="mt-4 text-xs font-bold uppercase tracking-widest border-b border-white/50 hover:border-white hover:opacity-100 opacity-70 transition-all"
-                            >
-                                Send Another
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <p className="text-[10px] md:text-xs uppercase font-bold opacity-80">Call Us</p>
+              <p className="text-sm md:text-lg font-bold leading-tight">9487509935</p>
+              <p className="text-sm md:text-lg font-bold leading-tight">72080 97980</p>
             </div>
-        </section>
+          </div>
+
+          {/* Email Us */}
+          <div className="flex items-center gap-3 md:gap-4">
+            <div className="p-3 md:p-4 bg-white/20 md:bg-white/50 rounded-full shrink-0">
+              <FaEnvelope className="text-sm md:text-base" />
+            </div>
+            <div className="overflow-hidden">
+              <p className="text-[10px] md:text-xs uppercase font-bold opacity-80">Email Us</p>
+              <p className="text-xs sm:text-sm md:text-lg font-bold truncate">swatigore@picturize.co.in</p>
+              <p className="text-xs sm:text-sm md:text-lg font-bold truncate">godwin@picturize.co.in</p>
+            </div>
+          </div>
+
+          {/* Location - Full width on small mobile, part of grid on larger */}
+          <div className="flex items-center gap-3 md:gap-4 sm:col-span-2 md:col-span-1">
+            <div className="p-3 md:p-4 bg-white/20 md:bg-white/50 rounded-full shrink-0">
+              <FaMapMarkerAlt className="text-sm md:text-base" />
+            </div>
+            <div>
+              <p className="text-[10px] md:text-xs uppercase font-bold opacity-80">Location</p>
+              <p className="text-sm md:text-lg font-bold">Maharashtra | Tamil Nadu</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       </div>
     </div>

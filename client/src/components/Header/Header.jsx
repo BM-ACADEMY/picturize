@@ -2,19 +2,31 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { MdClose } from "react-icons/md";
+import ContactForm from "@/components/Pages/ContactForm"; 
+
+// Assets
+import Logo from "@/assets/logo.png";
+import Pdf from "@/assets/portfolio.pdf";
 
 const navLinks = [
-  { title: "Home", href: "#" },
-  { title: "Work", href: "#" },
-  { title: "Services", href: "#" },
-  { title: "About", href: "#" },
-  { title: "Contact", href: "#" },
+  { 
+    title: "Portfolio", 
+    href: Pdf, 
+    isPdf: true,
+    isModal: false
+  },
+  { 
+    title: "Enquiry", 
+    href: "#", 
+    isPdf: false,
+    isModal: true 
+  },
 ];
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showEnquiry, setShowEnquiry] = useState(false);
 
-  // Refs
   const containerRef = useRef(null);
   const headerRef = useRef(null);
   const tlRef = useRef(null);
@@ -22,14 +34,12 @@ const Header = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Initial Navbar Entrance
       gsap.fromTo(
         headerRef.current,
         { y: -100, opacity: 0 },
         { y: 0, opacity: 1, duration: 1, ease: "power4.out" }
       );
 
-      // 2. Main Menu Animation Timeline
       tlRef.current = gsap.timeline({ paused: true });
 
       tlRef.current
@@ -43,26 +53,23 @@ const Header = () => {
           {
             y: 0,
             opacity: 1,
-            duration: 1,
+            duration: 0.8,
             stagger: 0.1,
             ease: "power4.out",
           },
-          "-=0.5"
+          "-=0.4"
         )
         .to(
           ".menu-footer",
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.5,
-          },
-          "-=0.5"
+          { opacity: 1, y: 0, duration: 0.4 },
+          "-=0.4"
         );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
+  // Control Menu playback via state
   useEffect(() => {
     if (tlRef.current) {
       if (menuOpen) {
@@ -70,33 +77,54 @@ const Header = () => {
         document.body.style.overflow = "hidden";
       } else {
         tlRef.current.reverse();
-        document.body.style.overflow = "auto";
+        if (!showEnquiry) document.body.style.overflow = "auto";
       }
     }
-  }, [menuOpen]);
+  }, [menuOpen, showEnquiry]);
+
+  // UPDATED HANDLER: Closes menu first, THEN opens modal
+  const handleLinkClick = async (e, link) => {
+    if (link.isModal) {
+      e.preventDefault();
+      
+      // 1. Close the menu state
+      setMenuOpen(false); 
+      
+      // 2. Wait for the GSAP reverse animation to finish completely
+      if (tlRef.current) {
+        await tlRef.current.reverse(); 
+      }
+      
+      // 3. Open the enquiry modal
+      setShowEnquiry(true);
+      document.body.style.overflow = "hidden"; // Ensure scroll stays locked
+    } else {
+      if (!link.isPdf) setMenuOpen(false);
+    }
+  };
 
   return (
     <div ref={containerRef}>
       {/* --- NAVBAR --- */}
       <nav
         ref={headerRef}
-        className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 flex justify-between items-center mix-blend-difference text-white"
+        className="fixed top-0 left-0 w-full z-[60] px-6 md:px-12 py-6 flex justify-between items-center text-white"
       >
-        <div className="text-xl md:text-2xl font-light tracking-[0.2em] uppercase cursor-pointer z-50">
-          Picturize
+        <div className="z-[70]">
+           <img src={Logo} alt='logo' className="w-40 md:w-56 h-auto object-contain" />
         </div>
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="group relative flex items-center justify-center p-2 z-50 rounded-full hover:bg-white/10 transition-all duration-300"
+          className="group relative flex items-center justify-center p-2 z-[70] rounded-full hover:bg-white/10 transition-all duration-300"
         >
           <div className="text-3xl">
             {menuOpen ? (
-              <span className="block animate-spin-slow">
+              <span className="block text-white">
                 <MdClose />
               </span>
             ) : (
-              <span className="block group-hover:rotate-180 transition-transform duration-500">
+              <span className="block group-hover:rotate-180 transition-transform duration-500 text-black">
                 <HiMenuAlt4 />
               </span>
             )}
@@ -107,20 +135,18 @@ const Header = () => {
       {/* --- FULL SCREEN MENU OVERLAY --- */}
       <div
         ref={menuOverlayRef}
-        className="fixed inset-0 bg-[#0a0a0a] z-40 flex flex-col justify-center items-center text-white"
+        className="fixed inset-0 bg-[#0a0a0a] z-50 flex flex-col justify-center items-center text-white"
         style={{ clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" }}
       >
         <div className="flex flex-col items-center gap-6 md:gap-8">
           {navLinks.map((link, index) => (
-            /* FIX APPLIED HERE:
-               Added 'px-4' (padding-x) to give the text horizontal room to slant
-               Added 'py-1' (padding-y) to ensure descenders aren't clipped
-            */
             <div key={index} className="overflow-hidden px-4 py-1">
               <a
                 href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="menu-link-item block text-5xl md:text-8xl font-black text-white uppercase tracking-tighter hover:text-[#ffdb4d]  transition-all duration-300 cursor-pointer opacity-0 translate-y-[150px]"
+                target={link.isPdf ? "_blank" : "_self"}
+                rel={link.isPdf ? "noopener noreferrer" : ""}
+                onClick={(e) => handleLinkClick(e, link)}
+                className="menu-link-item block text-5xl md:text-8xl font-black text-white uppercase tracking-tighter hover:text-[#ffdb4d] transition-all duration-300 cursor-pointer opacity-0 translate-y-[150px]"
               >
                 {link.title}
               </a>
@@ -132,11 +158,16 @@ const Header = () => {
           <div className="flex gap-4">
             <span className="hover:text-white cursor-pointer transition-colors">Instagram</span>
             <span className="hover:text-white cursor-pointer transition-colors">LinkedIn</span>
-            <span className="hover:text-white cursor-pointer transition-colors">Twitter</span>
           </div>
-          <div>© 2024 Picturize Agency</div>
+          <div>© 2026 Picturize Agency</div>
         </div>
       </div>
+
+      {/* --- ENQUIRY MODAL --- */}
+      <ContactForm 
+        isOpen={showEnquiry} 
+        onClose={() => setShowEnquiry(false)} 
+      />
     </div>
   );
 };

@@ -3,8 +3,10 @@ import { gsap } from 'gsap';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Banner from "@/assets/banner.png"
 
+
 // Import the new component
 import StackedCards from './StackedCards';
+import Footer from '../Header/Footer';
 
 const Home = () => {
   const heroRef = useRef(null);
@@ -134,6 +136,9 @@ const Home = () => {
 
       {/* ================= IMPORTED STACKED SECTION ================= */}
       <StackedCards ref={stackSectionRef} />
+<div className="relative z-[100] bg-black w-full shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"> 
+   <Footer />
+</div>
 
     </div>
   );
