@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis';
-import Header from './components/Header/Header';
+// import Header from './components/Header/Header';
 import Home from '@/components/Pages/Home';
 
 const App = () => {
@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div className="font-sans antialiased">
-      <Header />
+      {/* <Header /> */}
       <main>
         <Home />
       </main>
