@@ -25,6 +25,7 @@ import { MdOutlineSocialDistance, MdOutlineDashboardCustomize, MdOutlineLocalPos
 import { BiCartAlt, BiPackage } from "react-icons/bi";
 import { AiOutlineLayout } from "react-icons/ai";
 
+
 import Logo from "@/assets/logowhite.png";
 import Logo2 from "@/assets/logo.png";
 
@@ -171,7 +172,7 @@ const StackedCards = forwardRef((props, ref) => {
                 <path id="textPath1" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                 <text>
                 <textPath href="#textPath1" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-white group-hover:fill-[#ffdb4d] transition-colors">
-                    View Our Portfolio • View Our Portfolio •
+                    Portfolio here • Portfolio here •
                 </textPath>
                 </text>
             </svg>
@@ -261,7 +262,7 @@ const StackedCards = forwardRef((props, ref) => {
               <path id="textPathYellow" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
               <text>
                 <textPath href="#textPathYellow" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-black transition-colors">
-                  View Our Portfolio • View Our Portfolio •
+                  Portfolio here • Portfolio here •
                 </textPath>
               </text>
             </svg>
@@ -365,7 +366,7 @@ const StackedCards = forwardRef((props, ref) => {
                             <path id="textPathBlack3" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                             <text>
                                 <textPath href="#textPathBlack3" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-white group-hover:fill-[#ffdb4d] transition-colors">
-                                    View Our Portfolio • View Our Portfolio •
+                                    Portfolio here • Portfolio here •
                                 </textPath>
                             </text>
                         </svg>
@@ -490,7 +491,7 @@ const StackedCards = forwardRef((props, ref) => {
             </div>
             <div>
               <p className="text-[10px] md:text-xs uppercase font-bold opacity-80">Location</p>
-              <p className="text-sm md:text-lg font-bold">Maharashtra | Tamil Nadu</p>
+              <p className="text-sm md:text-lg font-bold">Mumbai | Chennai</p>
             </div>
           </div>
           

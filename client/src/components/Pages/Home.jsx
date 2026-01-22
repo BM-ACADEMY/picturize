@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Banner from "@/assets/banner.png";
+import Logo2 from "@/assets/logo.png"; // 1. Import Added
 
 // Import components
 import StackedCards from './StackedCards';
@@ -29,21 +30,28 @@ const Home = () => {
         ease: "power4.out",
         delay: 0.2
       })
-      // 2. Subtext Animation (Added here)
+      // 2. Subtext Animation
       .from(".subtext-item", {
         y: 20,
         opacity: 0,
         duration: 0.8,
         stagger: 0.05,
         ease: "power3.out"
-      }, "-=0.6") // Starts slightly before heading finishes
+      }, "-=0.6") 
       // 3. Main Card Animation
       .from(".hero-card", {
         scale: 0.9,
         opacity: 0,
         duration: 1,
         ease: "expo.out"
-      }, "-=0.4");
+      }, "-=0.4")
+      // 4. Logo Animation (Optional - adds a nice touch)
+      .from(".brand-logo", {
+        opacity: 0,
+        x: -20,
+        duration: 1,
+        ease: "power3.out"
+      }, 0);
 
     }, heroRef);
 
@@ -53,24 +61,36 @@ const Home = () => {
   return (
     <div ref={heroRef} className="w-full bg-[#f4f4f4] text-black relative overflow-hidden">
       
+      {/* ================= 2. LOGO SECTION ================= */}
+      {/* Placed here to be absolute relative to the main container */}
+      <div className="brand-logo absolute top-6 left-6 md:top-10 md:left-10 z-50">
+        <img 
+            src={Logo2}
+            alt="Logo" 
+            className="w-20 md:w-32 lg:w-40 h-auto object-contain hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
       {/* ================= HERO SECTION ================= */}
-      {/* pt-16 for mobile, pt-5 for desktop to remove top gap */}
       <section className="min-h-screen w-full flex flex-col items-center pt-16 md:pt-5 px-4 relative z-10">
         
-        {/* Banner Image */}
-        <div className="absolute -top-28 -left-10 md:left-0 w-[50vw] md:w-[35vw] opacity-80 pointer-events-none mix-blend-multiply">
-           <motion.img 
-             src={Banner} 
-             alt="Abstract"
-             className="w-full h-auto object-contain"
-           />
-        </div>
+        {/* ================= 3. BANNER IMAGE FIXED ================= */}
+        {/* Changed -top-28 to top-0 so it is not hidden */}
+       {/* Banner Image */}
+{/* Changed -top-80 to top-0 for mobile. Added md:top-0 for desktop. */}
+<div className="absolute -top-30 left-0 md:-top-70 md:left-0 w-[50vw] md:w-[35vw] opacity-80 pointer-events-none mix-blend-multiply">
+    <motion.img 
+        src={Banner} 
+        alt="Abstract"
+        className="w-full h-auto object-contain"
+    />
+</div>
 
         {/* --- MAIN HEADING --- */}
-        <div className="flex flex-col items-center w-full max-w-6xl mb-8 relative">
+        <div className="flex flex-col items-center w-full max-w-6xl mb-8 relative mt-12 md:mt-0">
           <div className="overflow-hidden w-full flex justify-center">
              <h1 className="hero-line text-[8vw] md:text-[5vw] leading-[0.9] font-black uppercase tracking-tighter">
-                Visualize
+               Visualize
              </h1>
           </div>
           
@@ -92,8 +112,9 @@ const Home = () => {
           </div>
         </div>
 
-        {/* --- ANIMATED SUBTEXT --- */}
-        <div className="hero-subtext flex flex-wrap justify-center gap-3 md:gap-6 text-[10px] md:text-xs font-bold tracking-widest uppercase mb-10 opacity-80 text-center">
+        {/* --- 4. ANIMATED SUBTEXT SIZE INCREASED --- */}
+        {/* Changed text-[10px] md:text-xs TO text-sm md:text-xl */}
+        <div className="hero-subtext flex flex-wrap justify-center gap-3 md:gap-6 text-sm md:text-xl font-bold tracking-widest uppercase mb-10 opacity-80 text-center">
           <span className="subtext-item">Branding</span> 
           <span className="subtext-item opacity-40">|</span> 
           <span className="subtext-item">Videos</span> 
@@ -125,9 +146,6 @@ const Home = () => {
                     <h2 className="text-5xl md:text-6xl font-serif text-[#e8fc7e] leading-none">
                         Launch <br/> <i className="font-serif italic">day</i>
                     </h2>
-                    {/* <button className="hidden md:block border border-[#e8fc7e] text-[#e8fc7e] px-5 py-2 rounded-full hover:bg-[#e8fc7e] hover:text-black transition-colors uppercase text-[10px] tracking-wider">
-                        Learn More
-                    </button> */}
                 </div>
             </div>
         </motion.div>
