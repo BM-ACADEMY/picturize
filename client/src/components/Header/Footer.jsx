@@ -2,12 +2,13 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { Send, Check, Loader2, PartyPopper, AlertCircle, X } from 'lucide-react';
+// Added react-icons import
+import { FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa'; 
 import axios from 'axios';
 import Logo from "@/assets/logowhite.png";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-// --- Multi-Purpose Toast Component ---
 // --- Compact Multi-Purpose Toast Component ---
 const Toast = ({ show, onClose, type = "success", message }) => (
   <AnimatePresence>
@@ -91,8 +92,6 @@ const Footer = () => {
     };
 
     try {
-      // Use full URL if the ENV is failing: 
-      // const res = await axios.post("http://localhost:5000/api/picturize/contact", data);
       const res = await axios.post(`${API_URL}/picturize/contact`, data);
 
       if (res.status === 200 || res.status === 201) {
@@ -102,7 +101,6 @@ const Footer = () => {
       }
     } catch (err) {
       console.error("Submission Error:", err);
-      // This handles the ERR_CONNECTION_REFUSED or Server errors
       const errorMsg = err.response 
         ? err.response.data.message 
         : "Server is unreachable. Please check if the backend is running.";
@@ -125,17 +123,42 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
           
-          <div className="lg:col-span-5 flex flex-col">
+          {/* --- LEFT COLUMN (Updated Content) --- */}
+          <div className="lg:col-span-5 flex flex-col justify-start">
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-              <div className="mb-8">
+              <div className="mb-12">
                 <img src={Logo} alt='logo' className="w-64 h-auto" />
               </div>
-              <p className="text-gray-400 max-w-md text-lg leading-relaxed mb-10">
-                Picturize specializes in crafting compelling brand stories that elevate products and businesses.
-              </p>
+
+              {/* Contact Information Blocks */}
+              <div className="space-y-8">
+                {/* Phone Block */}
+                <div className="flex items-center gap-4">
+                  <div className="p-4 bg-white/10 rounded-full shrink-0 text-white">
+                    <FaPhoneAlt className="text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase font-bold text-gray-500 mb-1 tracking-wider">Call Us</p>
+                    <p className="text-lg font-bold leading-tight">8591127699 | 9487509935</p>
+                  </div>
+                </div>
+
+                {/* Location Block */}
+                <div className="flex items-center gap-4">
+                  <div className="p-4 bg-white/10 rounded-full shrink-0 text-white">
+                    <FaMapMarkerAlt className="text-lg" />
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase font-bold text-gray-500 mb-1 tracking-wider">Location</p>
+                    <p className="text-lg font-bold">Mumbai | Chennai</p>
+                  </div>
+                </div>
+              </div>
+
             </motion.div>
           </div>
 
+          {/* --- RIGHT COLUMN (Form) --- */}
           <div className="lg:col-span-7">
             <form className="space-y-10 w-full" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -169,35 +192,33 @@ const Footer = () => {
               </div>
 
               <div className="flex justify-end pt-4">
-             <motion.button
-  ref={btnRef}
-  disabled={isSending}
-  type="submit"
-  className="relative group overflow-hidden px-10 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all duration-500 disabled:cursor-not-allowed min-w-[180px]
-    /* Apple Glass Effect */
-    bg-white/10 
-    backdrop-blur-xl 
-    border border-white/20 
-    shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
-    hover:bg-white/20 
-    hover:border-white/40
-    text-white"
->
-  {/* The Glossy Overlay (Reflection) */}
-  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-50 pointer-events-none" />
-  
-  <AnimatePresence mode="wait">
-    {isSending ? (
-      <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-        <Loader2 className="animate-spin" size={20} />
-      </motion.div>
-    ) : (
-      <motion.div key="text" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 relative z-10">
-        Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-      </motion.div>
-    )}
-  </AnimatePresence>
-</motion.button>
+               <motion.button
+                  ref={btnRef}
+                  disabled={isSending}
+                  type="submit"
+                  className="relative group overflow-hidden px-10 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all duration-500 disabled:cursor-not-allowed min-w-[180px]
+                    bg-white/10 
+                    backdrop-blur-xl 
+                    border border-white/20 
+                    shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]
+                    hover:bg-white/20 
+                    hover:border-white/40
+                    text-white"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-50 pointer-events-none" />
+                  
+                  <AnimatePresence mode="wait">
+                    {isSending ? (
+                      <motion.div key="loading" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <Loader2 className="animate-spin" size={20} />
+                      </motion.div>
+                    ) : (
+                      <motion.div key="text" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-2 relative z-10">
+                        Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
               </div>
             </form>
           </div>

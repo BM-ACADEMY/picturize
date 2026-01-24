@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Banner from "@/assets/banner.png";
-import Logo2 from "@/assets/logo.png"; // 1. Import Added
+import Logo2 from "@/assets/logo.png"; 
 
 // Import components
 import StackedCards from './StackedCards';
@@ -45,7 +45,7 @@ const Home = () => {
         duration: 1,
         ease: "expo.out"
       }, "-=0.4")
-      // 4. Logo Animation (Optional - adds a nice touch)
+      // 4. Logo Animation
       .from(".brand-logo", {
         opacity: 0,
         x: -20,
@@ -62,7 +62,6 @@ const Home = () => {
     <div ref={heroRef} className="w-full bg-[#f4f4f4] text-black relative overflow-hidden">
       
       {/* ================= 2. LOGO SECTION ================= */}
-      {/* Placed here to be absolute relative to the main container */}
       <div className="brand-logo absolute top-6 left-6 md:top-10 md:left-10 z-50">
         <img 
             src={Logo2}
@@ -72,22 +71,21 @@ const Home = () => {
       </div>
 
       {/* ================= HERO SECTION ================= */}
-      <section className="min-h-screen w-full flex flex-col items-center pt-16 md:pt-5 px-4 relative z-10">
+      {/* CHANGE 1: Reduced pt-16 to pt-10 to pull everything up */}
+      <section className="min-h-screen w-full flex flex-col items-center pt-10 md:pt-4 px-4 relative z-10">
         
         {/* ================= 3. BANNER IMAGE FIXED ================= */}
-        {/* Changed -top-28 to top-0 so it is not hidden */}
-       {/* Banner Image */}
-{/* Changed -top-80 to top-0 for mobile. Added md:top-0 for desktop. */}
-<div className="absolute -top-30 left-0 md:-top-70 md:left-0 w-[50vw] md:w-[35vw] opacity-80 pointer-events-none mix-blend-multiply">
-    <motion.img 
-        src={Banner} 
-        alt="Abstract"
-        className="w-full h-auto object-contain"
-    />
-</div>
+        <div className="absolute -top-30 left-0 md:-top-70 md:left-0 w-[50vw] md:w-[35vw] opacity-80 pointer-events-none mix-blend-multiply">
+            <motion.img 
+                src={Banner} 
+                alt="Abstract"
+                className="w-full h-auto object-contain"
+            />
+        </div>
 
         {/* --- MAIN HEADING --- */}
-        <div className="flex flex-col items-center w-full max-w-6xl mb-8 relative mt-12 md:mt-0">
+        {/* CHANGE 2: Reduced mt-12 to mt-4 (mobile) and removed margin on desktop */}
+        <div className="flex flex-col items-center w-full max-w-6xl mb-6 relative mt-4 md:mt-0">
           <div className="overflow-hidden w-full flex justify-center">
              <h1 className="hero-line text-[8vw] md:text-[5vw] leading-[0.9] font-black uppercase tracking-tighter">
                Visualize
@@ -112,9 +110,9 @@ const Home = () => {
           </div>
         </div>
 
-        {/* --- 4. ANIMATED SUBTEXT SIZE INCREASED --- */}
-        {/* Changed text-[10px] md:text-xs TO text-sm md:text-xl */}
-        <div className="hero-subtext flex flex-wrap justify-center gap-3 md:gap-6 text-sm md:text-xl font-bold tracking-widest uppercase mb-10 opacity-80 text-center">
+        {/* --- 4. ANIMATED SUBTEXT --- */}
+        {/* CHANGE 3: Reduced mb-10 to mb-6 to pull the card up closer to text */}
+        <div className="hero-subtext flex flex-wrap justify-center gap-3 md:gap-6 text-sm md:text-xl font-bold tracking-widest uppercase mb-6 opacity-80 text-center">
           <span className="subtext-item">Branding</span> 
           <span className="subtext-item opacity-40">|</span> 
           <span className="subtext-item">Videos</span> 
@@ -144,7 +142,7 @@ const Home = () => {
                 
                 <div className="flex justify-between items-end">
                     <h2 className="text-5xl md:text-6xl font-serif text-[#e8fc7e] leading-none">
-                        Launch <br/> <i className="font-serif italic">day</i>
+                       Launch <br/> <i className="font-serif italic">day</i>
                     </h2>
                 </div>
             </div>

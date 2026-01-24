@@ -167,7 +167,7 @@ const StackedCards = forwardRef((props, ref) => {
                                 <path id="textPath1" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                                 <text>
                                 <textPath href="#textPath1" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-white group-hover:fill-[#ffdb4d] transition-colors">
-                                     Portfolio here • Portfolio here •
+                                     Portfolio  Portfolio 
                                 </textPath>
                                 </text>
                             </svg>
@@ -227,7 +227,7 @@ const StackedCards = forwardRef((props, ref) => {
           </div>
 
           <div className="inner-content w-full h-full relative overflow-y-auto no-scrollbar z-10 flex flex-col">
-            <div className="container mx-auto px-6 pt-16 md:pt-20 pb-8 flex flex-row justify-between items-center md:items-end border-b border-black/10">
+            <div className="container mx-auto px-6 pt-16 md:pt-20 pb-8 flex flex-row justify-between items-center md:items-end ">
             <div className="absolute top-6 left-6 md:top-10 md:left-10 z-50">
                 <img 
                     src={Logo2}
@@ -254,7 +254,7 @@ const StackedCards = forwardRef((props, ref) => {
                       <path id="textPathYellow" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                       <text>
                         <textPath href="#textPathYellow" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-black transition-colors">
-                           Portfolio here • Portfolio here •
+                           Portfolio  Portfolio 
                         </textPath>
                       </text>
                     </svg>
@@ -341,7 +341,7 @@ const StackedCards = forwardRef((props, ref) => {
                                     <path id="textPathBlack3" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                                     <text>
                                         <textPath href="#textPathBlack3" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-white group-hover:fill-[#ffdb4d] transition-colors">
-                                             Portfolio here • Portfolio here •
+                                             Portfolio  Portfolio 
                                         </textPath>
                                     </text>
                                 </svg>
@@ -377,72 +377,56 @@ const StackedCards = forwardRef((props, ref) => {
             </div>
         </section>
 
-        {/* SECTION 4: About */}
+      
+       {/* SECTION 4: About */}
         <section className="stack-card h-screen w-full sticky top-0 z-40 bg-[#FFF500] text-[#3e3c00] overflow-hidden" data-header-color="white">
-            <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
-            <svg className="w-full h-full" width="100%" height="100%">
+    <div className="absolute inset-0 opacity-[0.05] pointer-events-none">
+        <svg className="w-full h-full" width="100%" height="100%">
             <pattern id="grid-yellow" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1"/>
             </pattern>
             <rect width="100%" height="100%" fill="url(#grid-yellow)" />
-            </svg>
+        </svg>
+    </div>
+    
+    <div className="inner-content w-full h-full relative overflow-y-auto no-scrollbar z-10 flex flex-col">
+        {/* Logo - Top Left */}
+        <div className="absolute top-6 left-6 md:top-10 md:left-10 z-50">
+            <img 
+                src={Logo2}
+                alt="Logo" 
+                className="w-20 md:w-32 lg:w-40 h-auto object-contain hover:scale-105 transition-transform duration-300"
+            />
         </div>
-        
-        
 
-        <div className="inner-content w-full h-full relative overflow-y-auto no-scrollbar z-10 flex flex-col">
-            <div className="absolute top-6 left-6 md:top-10 md:left-10 z-50">
-                        <img 
-                            src={Logo2}
-                            alt="Logo" 
-                            className="w-20 md:w-32 lg:w-40 h-auto object-contain hover:scale-105 transition-transform duration-300"
-                        />
-                    </div>
-                    
-            <div className="container mx-auto px-6 py-12 md:py-20 flex-grow flex flex-col justify-center">
-            <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
-                <div>
-                <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase mb-4 md:mb-8 tracking-tighter leading-none">
-                    About
-                </h2>
-                
-                <p className="text-lg sm:text-xl md:text-2xl font-medium leading-tight mb-4 md:mb-8 text-[#3e3c00]">
-                    Picturize, we specialize in crafting compelling brand stories that elevate your products and businesses. From ideation and design to seamless production, we handle every step of the content creation journey with precision and passion.
-                </p>
-                
-                <p className="text-sm sm:text-base md:text-lg leading-relaxed text-[#3e3c00] opacity-90">
-                    Our team is backed by deep expertise across various industries, delivering exceptional results. Whether it's creating stunning visual effects for a movie, video editing for renowned brands, or designing and producing innovative content, we excel in every aspect of 360-degree content production.
-                </p>
-                </div>
-
-                <div className="pt-8 md:pt-12 border-t border-red/10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                <div className="flex items-center gap-3 md:gap-4">
-                    <div className="p-3 md:p-4 bg-[#3e3c00]/20 bg-[#3e3c00]/20 rounded-full shrink-0">
-                    <FaPhoneAlt className="text-sm md:text-base" />
-                    </div>
-                    <div>
-                    <p className="text-[10px] md:text-xs uppercase font-bold opacity-80">Call Us</p>
-                    <p className="text-sm md:text-lg font-bold leading-tight">9487509935, 72080 97980</p>
-                    </div>
-                </div>
-
-                <div className="flex items-center gap-3 md:gap-4 sm:col-span-2 md:col-span-1">
-                    <div className="p-3 md:p-4 bg-[#3e3c00]/20 bg-[#3e3c00]/20 rounded-full shrink-0">
-                    <FaMapMarkerAlt className="text-sm md:text-base" />
-                    </div>
-                    <div>
-                    <p className="text-[10px] md:text-xs uppercase font-bold opacity-80">Location</p>
-                    <p className="text-sm md:text-lg font-bold">Mumbai | Chennai</p>
-                    </div>
-                </div>
-                
-                </div>
-            </div>
+        {/* CHANGE 1: Reduced py-12 md:py-20 TO py-6 md:py-12 
+            This reduces the gap at the very top and very bottom of the yellow area.
+        */}
+        <div className="container mx-auto px-6 py-6 md:py-12 flex-grow flex flex-col justify-center">
             
+            {/* CHANGE 2: Reduced space-y-8 md:space-y-12 TO space-y-4 md:space-y-8 
+                This reduces the gap between the Title, the first paragraph, and the second paragraph.
+            */}
+            <div className="max-w-6xl mx-auto space-y-4 md:space-y-8">
+                <div>
+                    {/* CHANGE 3: Reduced mb-4 md:mb-8 TO mb-2 md:mb-4 */}
+                    <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase mb-2 md:mb-4 tracking-tighter leading-none">
+                        About
+                    </h2>
+                    
+                    {/* CHANGE 4: Reduced mb-4 md:mb-8 TO mb-3 md:mb-6 */}
+                    <p className="text-lg sm:text-xl md:text-2xl font-medium leading-tight mb-3 md:mb-6 text-[#3e3c00]">
+                        Picturize, we specialize in crafting compelling brand stories that elevate your products and businesses. From ideation and design to seamless production, we handle every step of the content creation journey with precision and passion.
+                    </p>
+                    
+                    <p className="text-sm sm:text-base md:text-lg leading-relaxed text-[#3e3c00] opacity-90">
+                        Our team is backed by deep expertise across various industries, delivering exceptional results. Whether it's creating stunning visual effects for a movie, video editing for renowned brands, or designing and producing innovative content, we excel in every aspect of 360-degree content production.
+                    </p>
+                </div>
             </div>
         </div>
-        
-        </section>
+    </div>
+</section>
 
       </div>
     </div>
