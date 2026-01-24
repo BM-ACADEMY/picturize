@@ -167,7 +167,7 @@ const StackedCards = forwardRef((props, ref) => {
                                 <path id="textPath1" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                                 <text>
                                 <textPath href="#textPath1" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-white group-hover:fill-[#ffdb4d] transition-colors">
-                                    Portfolio • Portfolio •
+                                     Portfolio here • Portfolio here •
                                 </textPath>
                                 </text>
                             </svg>
@@ -254,7 +254,7 @@ const StackedCards = forwardRef((props, ref) => {
                       <path id="textPathYellow" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                       <text>
                         <textPath href="#textPathYellow" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-black transition-colors">
-                          Portfolio • Portfolio •
+                           Portfolio here • Portfolio here •
                         </textPath>
                       </text>
                     </svg>
@@ -341,7 +341,7 @@ const StackedCards = forwardRef((props, ref) => {
                                     <path id="textPathBlack3" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
                                     <text>
                                         <textPath href="#textPathBlack3" className="text-[12px] md:text-[10px] font-bold uppercase tracking-[0.2em] fill-white group-hover:fill-[#ffdb4d] transition-colors">
-                                            Portfolio • Portfolio •
+                                             Portfolio here • Portfolio here •
                                         </textPath>
                                     </text>
                                 </svg>
@@ -387,6 +387,8 @@ const StackedCards = forwardRef((props, ref) => {
             <rect width="100%" height="100%" fill="url(#grid-yellow)" />
             </svg>
         </div>
+        
+        
 
         <div className="inner-content w-full h-full relative overflow-y-auto no-scrollbar z-10 flex flex-col">
             <div className="absolute top-6 left-6 md:top-10 md:left-10 z-50">
@@ -396,6 +398,7 @@ const StackedCards = forwardRef((props, ref) => {
                             className="w-20 md:w-32 lg:w-40 h-auto object-contain hover:scale-105 transition-transform duration-300"
                         />
                     </div>
+                    
             <div className="container mx-auto px-6 py-12 md:py-20 flex-grow flex flex-col justify-center">
             <div className="max-w-6xl mx-auto space-y-8 md:space-y-12">
                 <div>
@@ -435,8 +438,10 @@ const StackedCards = forwardRef((props, ref) => {
                 
                 </div>
             </div>
+            
             </div>
         </div>
+        
         </section>
 
       </div>
